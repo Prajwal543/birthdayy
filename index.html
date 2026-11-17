@@ -1,0 +1,729 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>For My Favourite Sister</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600&family=Reenie+Beanie&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { paper: "#F7F3EB", paper2: "#E8DFD2", ink: "#332925", wine: "#713B48", rose: "#D6A6A5" },
+        fontFamily: {
+          display: ["'Instrument Serif'", "Georgia", "serif"],
+          body: ["Newsreader", "Georgia", "serif"],
+          sans: ["'Hanken Grotesk'", "system-ui", "sans-serif"],
+          hand: ["'Reenie Beanie'", "'Bradley Hand'", "cursive"]
+        }
+      }
+    }
+  };
+</script>
+<style>
+  /* Layout concept: a hand-assembled journal. Asymmetric 12-column spreads on warm paper, burgundy as the single accent, rose only for tape, underlines and confetti. The finale turns the page burgundy. */
+  :root {
+    --paper: #F7F3EB;
+    --paper2: #E8DFD2;
+    --ink: #332925;
+    --wine: #713B48;
+    --rose: #D6A6A5;
+    --accent: #713B48;
+    --line: rgba(113, 59, 72, .24);
+    --display: 'Instrument Serif', Georgia, serif;
+    --body: 'Newsreader', Georgia, serif;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+    --hand: 'Reenie Beanie', 'Bradley Hand', cursive;
+    color-scheme: light;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    padding-block: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* paper grain over everything, never takes clicks */
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 200; pointer-events: none;
+    opacity: .5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .22 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* paints the phone status-bar area above the sticky header */
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 80; background: var(--paper);
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--rose); color: var(--ink); }
+
+  .wrap {
+    width: 100%; max-width: 1240px; margin-inline: auto;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  @media (min-width: 768px) {
+    .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); }
+  }
+  section[id] { scroll-margin-top: 64px; }
+
+  .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .folio { display: flex; align-items: center; gap: 14px; font-family: var(--sans); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .62; }
+  .folio .rule { flex: 1; height: 1px; background: currentColor; opacity: .4; }
+  .balance { text-wrap: balance; }
+  .pretty { text-wrap: pretty; }
+  .accent { color: var(--accent); transition: color 1.8s ease; }
+  .meta { font-family: var(--sans); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; opacity: .64; }
+  .cap { font-family: var(--hand); font-size: 28px; line-height: 1.05; color: var(--accent); transition: color 1.8s ease; }
+  .hand { font-family: var(--hand); }
+  .wavy { text-decoration: underline wavy var(--rose); text-decoration-thickness: 1.5px; text-underline-offset: 8px; }
+
+  /* nav */
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 70;
+    background: var(--paper); border-bottom: 1px solid var(--line);
+  }
+  .nav a, .nav .navbtn {
+    font-family: var(--sans); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+    text-decoration: none; background: none; border: 0; padding: 8px 2px; cursor: pointer; position: relative;
+  }
+  .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background: var(--wine); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+  .nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); }
+  .iconbtn { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: none; border: 1px solid var(--line); color: var(--wine); cursor: pointer; border-radius: 50%; padding: 0; }
+  .iconbtn:hover { background: var(--paper2); }
+  .iconbtn:disabled { opacity: .4; cursor: not-allowed; }
+  .menu { position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-bottom: 1px solid var(--line); }
+
+  /* gate */
+  .gate {
+    position: fixed; inset: 0; z-index: 100; background: var(--paper);
+    display: flex; flex-direction: column; justify-content: space-between; gap: 32px; overflow-y: auto;
+    padding-top: max(24px, env(safe-area-inset-top, 0px));
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  .open-btn {
+    display: inline-flex; align-items: center; gap: 16px; text-align: left;
+    font-family: var(--sans); font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--wine); background: none; border: 0; border-bottom: 1px solid var(--wine); padding: 10px 0; cursor: pointer;
+  }
+  .open-btn .arrow { transition: transform .4s ease; display: inline-block; }
+  .open-btn:hover .arrow { transform: translateX(6px); }
+
+  /* photos */
+  .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    text-align: center; cursor: pointer; font-family: var(--sans); color: rgba(51,41,37,.6); border: 1px solid var(--line);
+  }
+  .ph:focus-within { outline: 2px solid var(--wine); outline-offset: -6px; }
+  .ph .t1 { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+  .ph .t2 { font-family: var(--hand); font-size: 26px; line-height: 1; color: var(--wine); }
+  .ph-a { background: var(--paper2); }
+  .ph-b { background: var(--rose); color: rgba(51,41,37,.75); }
+  .ph-b .t2 { color: var(--ink); }
+  .polaroid { background: #FCFAF5; padding: 10px 10px 14px; box-shadow: 0 1px 2px rgba(51,41,37,.14), 0 14px 26px -14px rgba(51,41,37,.45); position: relative; }
+  .tape { position: absolute; top: -11px; left: 50%; width: 74px; height: 22px; margin-left: -37px; background: rgba(214,166,165,.7); transform: rotate(-4deg); }
+  .slip { background: #FCFAF5; border: 1px solid var(--line); padding: 18px 20px 20px; box-shadow: 0 10px 22px -16px rgba(51,41,37,.4); }
+
+  /* envelope */
+  .env-wrap { perspective: 1400px; }
+  .env { position: relative; width: 100%; max-width: 540px; aspect-ratio: 3 / 2; margin: 0 auto; display: block; background: none; border: 0; padding: 0; cursor: pointer; }
+  .env:disabled { cursor: default; }
+  .env-body { position: absolute; inset: 0; background: #E3C2BF; border: 1px solid var(--line); box-shadow: 0 18px 30px -22px rgba(51,41,37,.55); }
+  .env-front { position: absolute; inset: 0; background: #DCB5B2; clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%); }
+  .env-flap { position: absolute; left: 0; right: 0; top: 0; height: 56%; background: #D2A9A6; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; }
+  .seal { position: absolute; left: 50%; top: 54%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--wine); color: #F3E2E0; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-style: italic; font-size: 22px; }
+  .letter { background: #FCFAF5; border: 1px solid var(--line); box-shadow: 0 24px 40px -30px rgba(51,41,37,.5); font-family: var(--body); }
+  .letter p { margin: 0 0 1.15em; }
+  .dropcap::first-letter { font-family: var(--display); font-size: 4.4em; line-height: .78; float: left; padding: .06em .12em 0 0; color: var(--wine); }
+
+  .finale { transition: background-color 1.8s ease, color 1.8s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .open-btn .arrow, .nav a::after, .finale, .accent, .cap { transition: none; }
+  }
+</style>
+
+<div id="root"></div>
+
+<script src="content.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@10.18.0/dist/framer-motion.js"></script>
+<script>
+(function () {
+  var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
+  var h = React.createElement;
+  var C = window.GIFT;
+  if (!C) {
+    document.getElementById("root").textContent = "content.js could not be loaded.";
+    return;
+  }
+  var NAME = C.sisterName, FROM = C.brotherName;
+
+  /* ---------- motion (plain-element fallback if the library is missing) ---------- */
+  var Mo = window.Motion || window.FramerMotion || null;
+  var motion = Mo ? Mo.motion : new Proxy({}, {
+    get: function (_, tag) {
+      return function (props) {
+        var rest = {};
+        for (var k in props) {
+          if (["initial","animate","whileInView","viewport","transition","exit","variants","whileHover","whileTap"].indexOf(k) < 0) rest[k] = props[k];
+        }
+        return h(tag, rest);
+      };
+    }
+  });
+  var AnimatePresence = Mo ? Mo.AnimatePresence : function (p) { return p.children; };
+  var useRM = Mo && Mo.useReducedMotion ? Mo.useReducedMotion : function () { return false; };
+  var EASE = [0.22, 0.61, 0.36, 1];
+
+  /* ---------- text helper: *word* becomes burgundy italic ---------- */
+  function rich(t) {
+    return String(t).split("*").map(function (part, i) {
+      return i % 2 ? h("em", { key: i, className: "accent" }, part) : part;
+    });
+  }
+
+  /* =====================================================================
+     MUSIC: one player for the whole visit, so it never restarts when the
+     section changes. Uses your audio file if it loads; otherwise plays a
+     soft original piano lullaby made with the Web Audio API.
+     ===================================================================== */
+  function createPlayer(cfg) {
+    var st = { playing: false, muted: false, mode: "idle" };
+    var subs = [];
+    var ctx = null, master = null, bus = null, timer = null, bar = 0, nextT = 0, el = null;
+    var VOL = 0.3, FILEVOL = (cfg && cfg.volume) || 0.35;
+    function emit() { var s = { playing: st.playing, muted: st.muted, mode: st.mode }; subs.forEach(function (f) { f(s); }); }
+    function mf(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+    function ensureCtx() {
+      if (ctx) return true;
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      try {
+        ctx = new AC();
+        master = ctx.createGain(); master.gain.value = st.muted ? 0 : VOL; master.connect(ctx.destination);
+        var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600; lp.connect(master);
+        bus = ctx.createGain(); bus.connect(lp);
+        var len = Math.floor(ctx.sampleRate * 2.4), buf = ctx.createBuffer(2, len, ctx.sampleRate);
+        for (var c = 0; c < 2; c++) { var d = buf.getChannelData(c); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+        var conv = ctx.createConvolver(); conv.buffer = buf;
+        var wet = ctx.createGain(); wet.gain.value = 0.4; bus.connect(conv); conv.connect(wet); wet.connect(lp);
+        return true;
+      } catch (e) { ctx = null; return false; }
+    }
+    function note(t, m, dur, vel) {
+      var f = mf(m), g = ctx.createGain();
+      var o1 = ctx.createOscillator(); o1.type = "triangle"; o1.frequency.value = f;
+      var o2 = ctx.createOscillator(); o2.type = "sine"; o2.frequency.value = f * 2;
+      var g2 = ctx.createGain(); g2.gain.value = 0.16; o2.connect(g2); g2.connect(g); o1.connect(g);
+      var end = t + dur + 1.3;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vel, t + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, end);
+      g.connect(bus);
+      o1.start(t); o2.start(t); o1.stop(end); o2.stop(end);
+    }
+    /* original 8-bar waltz-time lullaby in C: C Am F G | C Em F G */
+    var PROG = [
+      { r: 48, c: [64, 67], m: [[0, 76, 2], [2, 72, 1]] },
+      { r: 45, c: [60, 64], m: [[0, 72, 1], [1, 76, 1], [2, 79, 1]] },
+      { r: 41, c: [60, 65], m: [[0, 77, 2], [2, 76, 1]] },
+      { r: 43, c: [62, 65], m: [[0, 74, 2], [2, 71, 1]] },
+      { r: 48, c: [64, 67], m: [[0, 72, 1], [1, 76, 1], [2, 79, 1]] },
+      { r: 52, c: [59, 67], m: [[0, 76, 2], [2, 79, 1]] },
+      { r: 41, c: [60, 65], m: [[0, 77, 1.5], [1.5, 76, 0.5], [2, 74, 1]] },
+      { r: 43, c: [62, 65], m: [[0, 74, 1], [1, 71, 1], [2, 72, 1]] }
+    ];
+    var BAR = 2.5;
+    function playBar(i, t) {
+      var p = PROG[i], beat = BAR / 3;
+      note(t, p.r, BAR * 0.9, 0.2);
+      note(t + beat, p.c[0], beat * 1.6, 0.08);
+      note(t + beat * 2, p.c[1], beat * 1.2, 0.08);
+      p.m.forEach(function (n) { note(t + n[0] * beat, n[1], n[2] * beat, 0.15); });
+    }
+    function sched() {
+      if (!ctx) return;
+      if (nextT < ctx.currentTime) nextT = ctx.currentTime + 0.1;
+      while (nextT < ctx.currentTime + 1.8) { playBar(bar % PROG.length, nextT); nextT += BAR; bar++; }
+    }
+    function useSynth() {
+      if (el) { try { el.pause(); } catch (e) {} el = null; }
+      if (!ensureCtx()) { st.mode = "none"; st.playing = false; emit(); return; }
+      st.mode = "synth";
+      if (st.playing) {
+        try { ctx.resume(); } catch (e) {}
+        if (!timer) { timer = setInterval(sched, 400); }
+        sched();
+      }
+      emit();
+    }
+    function start() {
+      st.playing = true;
+      var src = cfg && cfg.src;
+      if (src) {
+        try {
+          el = new Audio(src); el.loop = true; el.volume = st.muted ? 0 : FILEVOL;
+          el.addEventListener("error", useSynth);
+          var p = el.play();
+          if (p && p.catch) p.catch(useSynth);
+          st.mode = "file";
+        } catch (e) { useSynth(); }
+      } else { useSynth(); }
+      emit();
+    }
+    function pause() {
+      st.playing = false;
+      if (el) { try { el.pause(); } catch (e) {} }
+      if (ctx) { try { ctx.suspend(); } catch (e) {} }
+      emit();
+    }
+    function resume() {
+      if (st.mode === "none") return;
+      st.playing = true;
+      if (el) { var p = el.play(); if (p && p.catch) p.catch(useSynth); }
+      else if (ctx) { try { ctx.resume(); } catch (e) {} if (!timer) timer = setInterval(sched, 400); sched(); }
+      else useSynth();
+      emit();
+    }
+    function setMuted(m) {
+      st.muted = m;
+      if (el) el.volume = m ? 0 : FILEVOL;
+      if (master && ctx) master.gain.setTargetAtTime(m ? 0 : VOL, ctx.currentTime, 0.06);
+      emit();
+    }
+    return {
+      start: start,
+      toggle: function () { st.playing ? pause() : resume(); },
+      toggleMute: function () { setMuted(!st.muted); },
+      subscribe: function (f) { subs.push(f); f({ playing: st.playing, muted: st.muted, mode: st.mode }); return function () { subs = subs.filter(function (x) { return x !== f; }); }; }
+    };
+  }
+  var player = createPlayer(C.audio);
+  function usePlayer() {
+    var s = useState({ playing: false, muted: false, mode: "idle" });
+    useEffect(function () { return player.subscribe(s[1]); }, []);
+    return s[0];
+  }
+
+  /* ---------- delicate confetti, once, at the finale ---------- */
+  function launchConfetti() {
+    var cv = document.createElement("canvas");
+    cv.setAttribute("aria-hidden", "true");
+    cv.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:150";
+    document.body.appendChild(cv);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = cv.width = Math.floor(window.innerWidth * dpr), H = cv.height = Math.floor(window.innerHeight * dpr);
+    var g = cv.getContext("2d");
+    var cols = ["#D6A6A5", "#F7F3EB", "#E8DFD2", "#B9707F", "#D6A6A5"];
+    var ps = [], i;
+    for (i = 0; i < 64; i++) {
+      ps.push({
+        x: Math.random() * W, y: -Math.random() * H * 0.7,
+        w: (5 + Math.random() * 5) * dpr, h: (8 + Math.random() * 8) * dpr,
+        r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.05,
+        vy: (0.7 + Math.random() * 0.9) * dpr, sw: Math.random() * 6.28, sa: (0.4 + Math.random() * 0.9) * dpr,
+        c: cols[i % cols.length], round: Math.random() < 0.25
+      });
+    }
+    var t0 = performance.now();
+    function frame(now) {
+      g.clearRect(0, 0, W, H);
+      var alive = false;
+      ps.forEach(function (p) {
+        p.y += p.vy; p.sw += 0.025; p.x += Math.sin(p.sw) * p.sa * 0.5; p.r += p.vr;
+        if (p.y < H + 20) alive = true;
+        var a = Math.max(0, Math.min(1, (H * 1.02 - p.y) / (H * 0.3)));
+        if (p.y < -20 || a <= 0) return;
+        g.save(); g.globalAlpha = a * 0.9; g.translate(p.x, p.y); g.rotate(p.r); g.fillStyle = p.c;
+        if (p.round) { g.beginPath(); g.arc(0, 0, p.w * 0.5, 0, 6.28); g.fill(); }
+        else { g.scale(1, Math.abs(Math.cos(p.sw))); g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+        g.restore();
+      });
+      if (alive && now - t0 < 16000) requestAnimationFrame(frame);
+      else if (cv.parentNode) cv.parentNode.removeChild(cv);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- shared pieces ---------- */
+  function Reveal(props) {
+    var rm = useRM();
+    var Cmp = motion[props.as || "div"];
+    return h(Cmp, {
+      className: props.className || "", style: props.style,
+      initial: rm ? false : { opacity: 0, y: props.y == null ? 18 : props.y },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, margin: "0px 0px -8% 0px" },
+      transition: { duration: rm ? 0 : 0.9, delay: props.delay || 0, ease: EASE }
+    }, props.children);
+  }
+  function Photo(props) {
+    var it = props.item;
+    var st = useState(null), local = st[0], setLocal = st[1];
+    var src = local || it.src;
+    function onFile(e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f) return;
+      var r = new FileReader();
+      r.onload = function () { setLocal(r.result); };
+      r.readAsDataURL(f);
+    }
+    if (src) {
+      return h("img", { src: src, alt: it.alt, loading: props.eager ? "eager" : "lazy", decoding: "async", fetchpriority: props.eager ? "high" : "auto", className: "absolute inset-0 w-full h-full object-cover", style: { objectPosition: it.pos || "50% 50%", filter: "sepia(.1) saturate(.94) contrast(1.02)" } });
+    }
+    return h("label", { className: "ph " + (props.tone === "b" ? "ph-b" : "ph-a") },
+      h("input", { type: "file", accept: "image/*", className: "sr-only", onChange: onFile, "aria-label": "Choose a photo for: " + it.alt }),
+      h("span", { className: "t1" }, props.label || "Your photograph"),
+      h("span", { className: "t2" }, "tap to add")
+    );
+  }
+  function Frame(props) {
+    return h("div", { className: "relative overflow-hidden w-full " + (props.className || ""), style: { aspectRatio: (props.item && props.item.ratio) || props.ratio } },
+      h(Photo, { item: props.item, tone: props.tone, label: props.label, eager: props.eager })
+    );
+  }
+  function Polaroid(props) {
+    return h("figure", { className: "polaroid m-0 " + (props.className || ""), style: { transform: "rotate(" + (props.rot || 0) + "deg)" } },
+      props.tape ? h("span", { className: "tape", "aria-hidden": "true" }) : null,
+      h(Frame, { item: props.item, ratio: "1 / 1", tone: props.tone, label: "Snapshot" }),
+      h("figcaption", { className: "cap pt-3 px-1 min-h-[44px]" }, props.item.caption)
+    );
+  }
+  function Folio(props) {
+    return h("div", { className: "folio mb-12 md:mb-16" },
+      h("span", null, props.page), h("span", { className: "rule", "aria-hidden": "true" }), h("span", null, props.title));
+  }
+  function Icon(props) {
+    var d = {
+      play: h("path", { d: "M8 5.5v13l11-6.5z", fill: "currentColor", stroke: "none" }),
+      pause: h("g", { fill: "currentColor", stroke: "none" }, h("rect", { x: 7, y: 5.5, width: 3.6, height: 13 }), h("rect", { x: 13.4, y: 5.5, width: 3.6, height: 13 })),
+      sound: h("g", null, h("path", { d: "M4 9.5h3.5L12 6v12l-4.5-3.5H4z" }), h("path", { d: "M15.5 9a4 4 0 0 1 0 6M18 6.8a7.5 7.5 0 0 1 0 10.4" })),
+      mute: h("g", null, h("path", { d: "M4 9.5h3.5L12 6v12l-4.5-3.5H4z" }), h("path", { d: "M16 9.5l5 5M21 9.5l-5 5" }))
+    };
+    return h("svg", { width: props.size || 18, height: props.size || 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true" }, d[props.name]);
+  }
+
+  /* ------------------------------- Opening ------------------------------- */
+  function Gate(props) {
+    var rm = useRM();
+    var O = C.opening;
+    function fade(delay) { return { initial: rm ? false : { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 1.1, delay: rm ? 0 : delay } }; }
+    return h(motion.div, {
+      className: "gate", exit: { y: "-100%" },
+      transition: { duration: rm ? 0 : 1.1, ease: [0.76, 0, 0.24, 1] },
+      role: "region", "aria-label": "Opening"
+    },
+      h(motion.p, Object.assign({ className: "eyebrow m-0" }, fade(0.3)), O.small),
+      h("div", { className: "w-full max-w-[1240px] mx-auto" },
+        h(motion.h1, {
+          className: "font-display font-normal text-ink m-0 balance",
+          style: { fontSize: "clamp(3.4rem, 13vw, 11rem)", lineHeight: 0.9, letterSpacing: "-0.02em" },
+          initial: rm ? false : { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 1.3, delay: rm ? 0 : 0.6, ease: EASE }
+        }, rich(O.title)),
+        h(motion.p, Object.assign({ className: "mt-8 mb-0 text-[1.05rem] text-ink/75" }, fade(1.3)), O.support)
+      ),
+      h("div", { className: "flex items-end justify-between gap-x-8 gap-y-6 flex-wrap" },
+        h(motion.div, Object.assign({ className: "flex flex-col gap-5 items-start" }, fade(1.6)),
+          h("button", { type: "button", className: "open-btn", onClick: props.onOpen }, O.button, h("span", { className: "arrow", "aria-hidden": "true" }, "→")),
+          h("p", { className: "m-0 flex items-center gap-2 text-[13px] text-ink/65" }, h("span", { className: "text-wine" }, h(Icon, { name: "sound", size: 16 })), O.soundNote)
+        ),
+        h("span", { className: "hand text-2xl text-wine/80 leading-none" }, "made by hand")
+      )
+    );
+  }
+
+  /* ------------------------------- Navigation ------------------------------- */
+  var LINKS = [["#journal", "Memories"], ["#letter", "Letter"], ["#little", "Little things"], ["#finale", "Finale"]];
+  function Nav() {
+    var ms = useState(false), menu = ms[0], setMenu = ms[1];
+    var p = usePlayer();
+    var off = p.mode === "none";
+    return h("header", { className: "nav" },
+      h("div", { className: "wrap flex items-center justify-between gap-4 h-[56px]" },
+        h("a", { href: "#top", className: "hand !text-[26px] !normal-case !tracking-normal !text-wine leading-none", "aria-label": "Back to the top" }, "for " + NAME),
+        h("nav", { "aria-label": "Sections", className: "hidden md:flex items-center gap-8" },
+          LINKS.map(function (l) { return h("a", { key: l[0], href: l[1] }, l[1]); })
+        ),
+        h("div", { className: "flex items-center gap-2" },
+          h("button", { type: "button", className: "iconbtn", onClick: function () { player.toggle(); }, disabled: off, "aria-label": p.playing ? "Pause music" : "Play music", title: off ? "Audio isn’t available in this browser" : (p.playing ? "Pause music" : "Play music") }, h(Icon, { name: p.playing ? "pause" : "play" })),
+          h("button", { type: "button", className: "iconbtn", onClick: function () { player.toggleMute(); }, disabled: off, "aria-pressed": p.muted, "aria-label": p.muted ? "Unmute music" : "Mute music", title: p.muted ? "Unmute" : "Mute" }, h(Icon, { name: p.muted ? "mute" : "sound" })),
+          h("button", { type: "button", className: "navbtn md:!hidden ml-2", "aria-expanded": menu, "aria-controls": "mobile-menu", onClick: function () { setMenu(!menu); } }, menu ? "Close" : "Index")
+        )
+      ),
+      menu ? h("div", { id: "mobile-menu", className: "menu md:hidden" },
+        h("nav", { "aria-label": "Sections (mobile)", className: "wrap flex flex-col py-3" },
+          LINKS.map(function (l) { return h("a", { key: l[0], href: l[1], className: "!py-3", onClick: function () { setMenu(false); } }, l[1]); })
+        )
+      ) : null
+    );
+  }
+
+  /* ------------------------------- Hero ------------------------------- */
+  function Hero(props) {
+    var rm = useRM();
+    var H1 = C.hero;
+    function a(delay) {
+      return {
+        initial: rm ? false : { opacity: 0, y: 20 },
+        animate: props.open ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+        transition: { duration: rm ? 0 : 1, delay: rm ? 0 : delay, ease: EASE }
+      };
+    }
+    return h("section", { id: "top", className: "wrap pt-10 pb-28 md:pt-14 md:pb-40", "aria-labelledby": "top-title" },
+      h("div", { className: "folio mb-10 md:mb-14" }, h("span", null, "The Birthday Issue"), h("span", { className: "rule", "aria-hidden": "true" }), h("span", null, "p. 02")),
+      h("div", { className: "grid md:grid-cols-12 gap-x-10 gap-y-12 items-start" },
+        h("div", { className: "md:col-span-5 md:pt-24 order-2 md:order-1" },
+          h(motion.h2, Object.assign({
+            id: "top-title", tabIndex: -1,
+            className: "font-display font-normal m-0 outline-none balance",
+            style: { fontSize: "clamp(3.2rem, 8.2vw, 7.2rem)", lineHeight: 0.92, letterSpacing: "-0.02em" }
+          }, a(0.8)), "Happy Birthday,", h("br"), h("em", { className: "accent" }, NAME)),
+          h(motion.div, Object.assign({ className: "mt-10 max-w-[29rem]" }, a(1.1)),
+            h("p", { className: "pretty m-0 text-[1.15rem] leading-[1.75]" }, H1.message),
+            h("p", { className: "hand text-[2rem] text-wine mt-6 mb-0 leading-none" }, "— " + H1.signature)
+          )
+        ),
+        h(motion.figure, Object.assign({ className: "md:col-span-7 md:col-start-6 order-1 md:order-2 m-0" }, a(0.55)),
+          h("div", { className: "md:ml-auto md:max-w-[640px]" }, h(Frame, { item: H1.photo, ratio: "4 / 5", label: "Your best portrait of her", eager: true })),
+          h("figcaption", { className: "mt-4 flex items-baseline gap-4 md:ml-auto md:max-w-[640px] justify-between" },
+            h("span", { className: "meta" }, "Plate I"),
+            h("span", { className: "cap" }, H1.photo.caption)
+          )
+        )
+      )
+    );
+  }
+
+  /* ------------------------------- Memories ------------------------------- */
+  function Memories() {
+    var M = C.memories, N = C.notes, I = C.memoriesIntro;
+    function has(i) { return !!(M[i] && M[i].src); }
+    function fig(i, ratio, tone, label) {
+      var m = M[i];
+      return [h(Frame, { key: "f", item: m, ratio: ratio, tone: tone, label: label }),
+        h("figcaption", { key: "c", className: "mt-4 flex items-baseline justify-between gap-4" },
+          h("span", { className: "meta" }, m.date || ""), h("span", { className: "cap" }, m.caption))];
+    }
+    var grid = "grid grid-cols-12 gap-x-6 md:gap-x-10 gap-y-14 items-start";
+    return h("section", { id: "journal", className: "wrap py-24 md:py-36", "aria-labelledby": "mem-title" },
+      h(Folio, { page: "p. 03", title: "Our memories" }),
+      h(Reveal, { className: "max-w-[38rem] mb-16 md:mb-24" },
+        h("h2", { id: "mem-title", className: "font-display font-normal m-0 balance", style: { fontSize: "clamp(2.4rem, 5.6vw, 4.6rem)", lineHeight: 1, letterSpacing: "-0.015em" } }, rich(I.title)),
+        h("p", { className: "mt-5 mb-0 text-[1.05rem] pretty text-ink/75" }, I.text)
+      ),
+      /* spread one: the tall portrait, a polaroid and two little notes */
+      h("div", { className: grid + " mb-8 md:mb-20" },
+        h(Reveal, { className: "col-span-11 md:col-span-5 md:col-start-1", as: "figure", style: { margin: 0 } }, fig(0, "3 / 4", "a", "A tall photo")),
+        h("div", { className: "col-span-12 md:col-span-6 md:col-start-7 flex flex-col gap-12 md:gap-16 md:pt-24" },
+          h(Reveal, { delay: 0.05, className: "w-[68%] md:w-[46%] ml-auto md:ml-10" }, h(Polaroid, { item: M[1], rot: -3.5, tape: true, tone: "b" })),
+          h(Reveal, { delay: 0.1, className: "max-w-[22rem] md:ml-auto md:mr-6" },
+            h("div", { className: "slip", style: { transform: "rotate(1.6deg)" } },
+              N[0].label ? h("p", { className: "meta m-0 mb-2" }, N[0].label) : null,
+              h("p", { className: "cap m-0", style: { fontSize: "34px" } }, N[0].text))),
+          h(Reveal, { delay: 0.1, className: "max-w-[20rem] md:ml-4" },
+            h("p", { className: "cap m-0", style: { fontSize: "34px", transform: "rotate(-1.5deg)" } }, N[1].text))
+        )
+      ),
+      /* optional spreads: shown only once photos are added in content.js */
+      (has(2) || has(3)) ? h("div", { className: grid + " mt-20 md:mt-32" },
+        has(2) ? h(Reveal, { className: "col-span-12 md:col-span-7", as: "figure", style: { margin: 0 } }, fig(2, "3 / 2", "a", "A wide photo")) : null,
+        has(3) ? h(Reveal, { className: "col-span-10 col-start-3 md:col-span-3 md:col-start-9 md:mt-28", delay: 0.1 }, h(Polaroid, { item: M[3], rot: 4 })) : null
+      ) : null,
+      (has(4) || has(5)) ? h("div", { className: grid + " mt-20 md:mt-32" },
+        has(5) ? h(Reveal, { className: "col-span-7 md:col-span-2 md:mt-24" }, h(Polaroid, { item: M[5], rot: -2.5, tone: "b", tape: true })) : null,
+        has(4) ? h(Reveal, { className: "col-span-12 md:col-span-8 md:col-start-5", as: "figure", style: { margin: 0 } }, fig(4, "16 / 10", "a", "A wide trip photo")) : null
+      ) : null
+    );
+  }
+
+  /* ------------------------------- Letter ------------------------------- */
+  function Letter() {
+    var L = C.letter;
+    var rm = useRM();
+    var st = useState(false), open = st[0], setOpen = st[1];
+    var dur = rm ? 0 : 0.9;
+    var ref = useRef(null);
+    function openIt() {
+      setOpen(true);
+      setTimeout(function () { if (ref.current) ref.current.focus({ preventScroll: true }); }, rm ? 50 : 1500);
+    }
+    return h("section", { id: "letter", style: { background: "var(--paper2)", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }, "aria-labelledby": "letter-title" },
+      h("div", { className: "wrap py-24 md:py-36" },
+        h(Folio, { page: "p. 04", title: "A letter" }),
+        h("div", { className: "grid md:grid-cols-12 gap-x-10 gap-y-14" },
+          h(Reveal, { className: "md:col-span-4" },
+            h("h2", { id: "letter-title", className: "font-display font-normal m-0 balance", style: { fontSize: "clamp(2.4rem, 5.2vw, 4.2rem)", lineHeight: 1, letterSpacing: "-0.015em" } }, rich(L.title)),
+            h("p", { className: "mt-5 mb-0 text-ink/75 max-w-[22rem] pretty" }, L.intro)
+          ),
+          h("div", { className: "md:col-span-8" },
+            h("div", { className: "env-wrap" },
+              h("button", {
+                type: "button", className: "env", onClick: openIt, disabled: open,
+                "aria-expanded": open, "aria-controls": "the-letter", "aria-label": open ? "Envelope opened" : "Open the envelope"
+              },
+                h("span", { className: "env-body" }),
+                h(motion.span, { className: "env-flap", initial: false, animate: { rotateX: open ? 180 : 0 }, transition: { duration: dur * 0.8, ease: [0.4, 0, 0.2, 1] }, style: { zIndex: open ? 0 : 3 } }),
+                h("span", { className: "env-front", style: { zIndex: 2 } }),
+                h(motion.span, { className: "seal", style: { zIndex: 4 }, initial: false, animate: { opacity: open ? 0 : 1, scale: open ? 0.6 : 1 }, transition: { duration: dur * 0.35 } }, (FROM || "?").charAt(0))
+              ),
+              h("p", { className: "meta text-center mt-5 mb-0", "aria-hidden": open ? "true" : undefined, style: { opacity: open ? 0 : 1, transition: "opacity .4s" } }, L.hint)
+            ),
+            h(motion.div, {
+              id: "the-letter", className: "overflow-hidden", initial: false,
+              animate: { height: open ? "auto" : 0, opacity: open ? 1 : 0 },
+              transition: { duration: dur, delay: open && !rm ? 0.55 : 0, ease: EASE },
+              "aria-hidden": open ? undefined : "true", inert: open ? undefined : ""
+            },
+              h("article", { ref: ref, tabIndex: -1, className: "letter mx-auto max-w-[660px] mt-10 px-7 py-10 md:px-14 md:py-14 outline-none" },
+                h("p", { className: "meta m-0 mb-8", style: { fontFamily: "var(--sans)" } }, "Written by hand, typed up for you"),
+                h("p", { className: "font-display italic text-[2.1rem] leading-none m-0 mb-8 text-wine" }, L.greeting.replace("{name}", NAME)),
+                h("div", { className: "text-[1.18rem] leading-[1.85] text-ink/90" },
+                  L.paragraphs.map(function (t, i) { return h("p", { key: i, className: "pretty" + (i === 0 ? " dropcap" : "") }, t); })
+                ),
+                h("p", { className: "m-0 mt-8 font-display italic text-[1.35rem]" }, L.closing),
+                h("p", { className: "hand text-[3rem] text-wine m-0 leading-none mt-2" }, FROM)
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+
+  /* ------------------------------- Little things ------------------------------- */
+  var PRESETS = [
+    "md:max-w-[80%]",
+    "md:ml-auto md:max-w-[34rem] md:text-right",
+    "md:ml-[8%] md:max-w-[70%]",
+    "md:ml-[18%] md:max-w-[62%]",
+    "md:ml-[6%] md:max-w-[34rem]",
+    "md:ml-auto md:max-w-[26rem] md:text-right",
+    "md:max-w-[75%]",
+    "md:ml-auto md:text-right"
+  ];
+  function Little() {
+    var T = C.littleThings;
+    return h("section", { id: "little", className: "wrap py-24 md:py-40", "aria-labelledby": "little-title" },
+      h(Folio, { page: "p. 05", title: "Little things about you" }),
+      h(Reveal, { className: "mb-16 md:mb-28" }, h("h2", { id: "little-title", className: "eyebrow m-0" }, T.heading)),
+      h("div", { className: "flex flex-col gap-12 md:gap-20" },
+        T.items.map(function (it, i) {
+          var cls = PRESETS[i % PRESETS.length];
+          var body;
+          if (it.kind === "big") {
+            body = h("p", { className: "font-display m-0 balance", style: { fontSize: "clamp(2.3rem, 6.4vw, 5.8rem)", lineHeight: 1.03, letterSpacing: "-0.015em" } }, rich(it.text));
+          } else if (it.kind === "hand") {
+            body = h("p", { className: "hand m-0 text-wine", style: { fontSize: "clamp(2.1rem, 4.4vw, 3.4rem)", lineHeight: 0.95, transform: "rotate(" + (i % 2 ? -1.5 : 1.5) + "deg)" } }, it.text);
+          } else {
+            body = h("div", null,
+              it.label ? h("p", { className: "eyebrow m-0 mb-3" }, it.label) : null,
+              h("p", { className: "font-body m-0 pretty", style: { fontSize: "clamp(1.6rem, 3.6vw, 3rem)", lineHeight: 1.12 } }, rich(it.text)));
+          }
+          return h(Reveal, { key: i, className: cls }, body);
+        })
+      )
+    );
+  }
+
+  /* ------------------------------- Finale ------------------------------- */
+  function Finale() {
+    var F = C.finale, rm = useRM();
+    var ref = useRef(null);
+    var st = useState(false), on = st[0], setOn = st[1];
+    useEffect(function () {
+      if (!ref.current || !("IntersectionObserver" in window)) { setOn(true); return; }
+      var done = false;
+      var io = new IntersectionObserver(function (es) {
+        if (done || !es[0].isIntersecting) return;
+        done = true; setOn(true);
+        if (!rm) setTimeout(launchConfetti, 900);
+        io.disconnect();
+      }, { threshold: 0.3 });
+      io.observe(ref.current);
+      return function () { io.disconnect(); };
+    }, []);
+    var words = F.message.split(" ");
+    var emph = (F.emphasis || []).map(function (w) { return w.toLowerCase(); });
+    var vp = { once: true, margin: "0px 0px -15% 0px" };
+    return h("section", {
+      id: "finale", ref: ref, className: "finale", "aria-labelledby": "finale-title",
+      style: { background: on ? "var(--wine)" : "var(--paper)", color: on ? "var(--paper)" : "var(--ink)", "--accent": on ? "var(--rose)" : "var(--wine)" }
+    },
+      h("div", { className: "wrap pt-24 pb-24 md:pt-32 md:pb-32" },
+        h(Folio, { page: "p. 06", title: "The last page" }),
+        h("div", { className: "grid md:grid-cols-12 gap-x-10 gap-y-12 items-end mb-20 md:mb-32" },
+          h(Reveal, { className: "md:col-span-6", as: "figure", style: { margin: 0 } },
+            h(Frame, { item: F.photo, ratio: "4 / 5", tone: "b", label: "The two of you" }),
+            h("figcaption", { className: "mt-4 flex justify-between items-baseline gap-4" },
+              h("span", { className: "meta" }, "Plate II"), h("span", { className: "cap" }, F.photo.caption))
+          ),
+          h(Reveal, { className: "md:col-span-5 md:col-start-8 pb-2", delay: 0.1 },
+            h("h2", { id: "finale-title", className: "font-display font-normal m-0 mb-8 balance", style: { fontSize: "clamp(2.2rem, 4.6vw, 3.8rem)", lineHeight: 1.02, letterSpacing: "-0.015em" } }, rich(F.title)),
+            F.paragraphs.map(function (t, i) { return h("p", { key: i, className: "m-0 mb-5 text-[1.12rem] leading-[1.8] pretty opacity-90" }, t); })
+          )
+        ),
+        h("div", { className: "max-w-[1000px] mx-auto text-center" },
+          h("p", { className: "font-display m-0 balance", style: { fontSize: "clamp(2.3rem, 6vw, 5.4rem)", lineHeight: 1.05, letterSpacing: "-0.015em" } },
+            words.map(function (w, i) {
+              var key = w.replace(/[^a-z]/gi, "").toLowerCase();
+              var em = emph.indexOf(key) >= 0;
+              return h(motion.span, {
+                key: i, className: "inline-block mr-[0.26em] " + (em ? "italic accent" : ""),
+                initial: rm ? false : { opacity: 0, y: 14 }, whileInView: { opacity: 1, y: 0 }, viewport: vp,
+                transition: { duration: rm ? 0 : 0.8, delay: rm ? 0 : i * 0.16, ease: EASE }
+              }, w);
+            })
+          ),
+          h(motion.div, {
+            "aria-hidden": "true", className: "mx-auto mt-10 h-px w-40 origin-left", style: { background: "var(--rose)" },
+            initial: rm ? false : { scaleX: 0 }, whileInView: { scaleX: 1 }, viewport: vp,
+            transition: { duration: rm ? 0 : 1.4, delay: rm ? 0 : words.length * 0.16 + 0.3, ease: EASE }
+          }),
+          h(motion.p, {
+            className: "hand mt-6 mb-0", style: { fontSize: "2.6rem", lineHeight: 1, color: "var(--rose)" },
+            initial: rm ? false : { opacity: 0 }, whileInView: { opacity: 1 }, viewport: vp,
+            transition: { duration: rm ? 0 : 1.2, delay: rm ? 0 : words.length * 0.16 + 1.2 }
+          }, F.sign + " — " + FROM)
+        ),
+        h("p", { className: "meta text-center mt-24 mb-0" }, "Made by hand, for " + NAME + " · 2026")
+      )
+    );
+  }
+
+  /* ------------------------------- App ------------------------------- */
+  function App() {
+    var st = useState(false), open = st[0], setOpen = st[1];
+    useEffect(function () {
+      try { document.body.style.overflow = open ? "" : "hidden"; } catch (e) {}
+    }, [open]);
+    function onOpen() {
+      player.start();           /* starts inside the click, so browsers allow sound */
+      setOpen(true);
+      try { window.scrollTo(0, 0); } catch (e) {}
+      setTimeout(function () {
+        var t = document.getElementById("top-title");
+        if (t) t.focus({ preventScroll: true });
+      }, 900);
+    }
+    return h(React.Fragment, null,
+      h("main", { inert: open ? undefined : "", "aria-hidden": open ? undefined : "true" },
+        h(Nav), h(Hero, { open: open }), h(Memories), h(Letter), h(Little), h(Finale)
+      ),
+      h(AnimatePresence, null, open ? null : h(Gate, { key: "gate", onOpen: onOpen }))
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+})();
+</script>
+
+</body></html>
